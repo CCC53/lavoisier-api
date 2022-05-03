@@ -1,13 +1,9 @@
 import { Request, Response } from "express";
-import { Cita } from '../models/citas';
+import { Cita } from '../models/cita';
 
 export const getCitas = async(req: Request, res: Response) => {
     try {
-        const citas = await Cita.find({
-            relations: {
-                paciente: true
-            }
-        });
+        const citas = await Cita.find();
         res.json({
             citas
         });
@@ -23,9 +19,7 @@ export const getCitaByID = async(req: Request, res: Response) => {
         const { id } = req.params;
         const cita = await Cita.findOne({
             where: { id },
-            relations: {
-                paciente: true
-            }
+            relations: { paciente: true }
         });
         if (!cita) {
             res.status(404).json({

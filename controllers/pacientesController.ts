@@ -1,13 +1,9 @@
 import { Request, Response } from "express";
-import { Paciente } from '../models/pacientes';
+import { Paciente } from '../models/paciente';
 
 export const getPacientes = async(req: Request, res: Response) => {
     try {
-        const pacientes = await Paciente.find({
-            relations: {
-                citas: true
-            }
-        });
+        const pacientes = await Paciente.find();
         res.json({
             pacientes
         });
@@ -22,12 +18,8 @@ export const getPacienteByID = async(req: Request, res: Response) => {
     try {
         const { id } = req.params;
         const paciente = await Paciente.findOne({
-            where: {
-                id
-            },
-            relations: {
-                citas: true
-            }
+            where: { id },
+            relations: { citas: true }
         });
         if (!paciente) {
             res.status(404).json({
@@ -48,13 +40,7 @@ export const getPacienteByID = async(req: Request, res: Response) => {
 export const addPaciente = async(req: Request, res: Response) => {
     try {
         const { nacimiento, email, nombre, telefono, sexo } = req.body;
-        const paciente = await Paciente.create({
-            nombre,
-            nacimiento,
-            email,
-            telefono,
-            sexo
-        });
+        const paciente = await Paciente.create({ nombre, nacimiento, email, telefono, sexo });
         await paciente.save();
         res.json({
             paciente

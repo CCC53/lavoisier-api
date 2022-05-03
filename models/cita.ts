@@ -1,5 +1,5 @@
 import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Paciente } from './pacientes';
+import { Paciente } from './paciente';
 
 @Entity('citas')
 export class Cita extends BaseEntity {
@@ -20,5 +20,5 @@ export class Cita extends BaseEntity {
     @ManyToOne(() => Paciente, (paciente) => paciente.citas,  {
         onDelete: "CASCADE"
     })
-    paciente: Paciente
+    paciente: Paciente;
 }

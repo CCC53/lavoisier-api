@@ -2,9 +2,8 @@ import cors from 'cors';
 import "reflect-metadata";
 import bodyParser from 'body-parser';
 import { db } from '../db/connection';
-import { citasRouter } from '../routes/citaRouter';
-import { pacientesRouter } from '../routes/pacienteRouter';
 import express, { Application } from 'express';
+import { pacientesRouter, citasRouter } from '../routes/router';
 
 export class Server {
     private application: Application;

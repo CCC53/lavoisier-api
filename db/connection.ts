@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import { DataSource } from "typeorm";
-import { Cita } from '../models/citas';
-import { Paciente } from '../models/pacientes';
+import { Cita } from '../models/cita';
+import { Paciente } from '../models/paciente';
 
 dotenv.config();
 

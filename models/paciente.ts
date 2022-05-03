@@ -1,5 +1,5 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { Cita } from './citas';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Cita } from './cita';
 
 export enum SexTypes {
     MASCULINO = "M",
@@ -33,12 +33,6 @@ export class Paciente extends BaseEntity {
         unique: true
     })
     email: string;
-
-    @CreateDateColumn()
-    createdAt: Date;
-
-    @UpdateDateColumn()
-    updatedAt: Date;
 
     @OneToMany(() => Cita, (cita) => cita.paciente)
     citas: Cita[];
