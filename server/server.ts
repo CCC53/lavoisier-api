@@ -1,14 +1,17 @@
 import cors from 'cors';
-import "reflect-metadata";
-import bodyParser from 'body-parser';
-import { db } from '../db/connection';
+import { DataSource } from "typeorm";
 import express, { Application } from 'express';
-import { pacientesRouter, citasRouter } from '../routes/router';
+import "reflect-metadata";
+import dotenv from 'dotenv';
+import { pacientesRouter, citasRouter, authRouter } from '../routes/router';
+
+dotenv.config();
 
 export class Server {
     private application: Application;
     private port: string;
     private apiPaths = {
+        auth: '/api/auth',
         pacientes: '/api/pacientes',
         citas: '/api/citas'
     }
@@ -23,14 +26,24 @@ export class Server {
 
     middlewares(): void {
         // Body
-        this.application.use(bodyParser.urlencoded({extended: true}));
-        this.application.use(bodyParser.json());
+        this.application.use(express.json());
         // CORS
         this.application.use(cors());
     }
 
     async db(): Promise<void> {
         try {
+            const db = new DataSource({
+                type: "postgres",
+                host: "localhost",
+                port: 5432,
+                username: process.env.DB_USER,
+                password: process.env.DB_PASSWORD,
+                database: "lavoisierdb",
+                entities: ["models/*.ts"],
+                synchronize: true,
+                logging: false,
+            });
             await db.initialize();
             console.log("DB online");
         } catch (error) {
@@ -39,6 +52,7 @@ export class Server {
     }
 
     routes(): void {
+        this.application.use(this.apiPaths.auth, authRouter);
         this.application.use(this.apiPaths.pacientes, pacientesRouter);
         this.application.use(this.apiPaths.citas, citasRouter);
     }
