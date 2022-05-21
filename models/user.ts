@@ -1,9 +1,5 @@
 import { BaseEntity, PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
-
-export enum RolTypes {
-    RECEPCIONISTA = "recepcionista",
-    NUTRIOLOGO = "nutriologo"
-}
+import { RolTypes } from '../types/types';
 
 @Entity('usuarios')
 export class Usuario extends BaseEntity {

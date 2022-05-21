@@ -3,7 +3,7 @@ import { DataSource } from "typeorm";
 import express, { Application } from 'express';
 import "reflect-metadata";
 import dotenv from 'dotenv';
-import { pacientesRouter, citasRouter, authRouter } from '../routes/router';
+import { pacientesRouter, citasRouter, authRouter, pagosRouter } from '../routes/router';
 
 dotenv.config();
 
@@ -13,7 +13,8 @@ export class Server {
     private apiPaths = {
         auth: '/api/auth',
         pacientes: '/api/pacientes',
-        citas: '/api/citas'
+        citas: '/api/citas',
+        pagos: '/api/pagos'
     }
 
     constructor() {
@@ -55,6 +56,7 @@ export class Server {
         this.application.use(this.apiPaths.auth, authRouter);
         this.application.use(this.apiPaths.pacientes, pacientesRouter);
         this.application.use(this.apiPaths.citas, citasRouter);
+        this.application.use(this.apiPaths.pagos, pagosRouter);
     }
 
     listen(): void {

@@ -1,11 +1,6 @@
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { SexTypes } from "../types/types";
 import { Cita } from './cita';
-
-export enum SexTypes {
-    MASCULINO = "M",
-    FEMENINO = "F",
-    OTRO = "O"
-}
 
 @Entity('pacientes')
 export class Paciente extends BaseEntity {
