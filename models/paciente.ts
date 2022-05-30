@@ -1,6 +1,8 @@
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { SexTypes } from "../types/types";
 import { Cita } from './cita';
+import { Antropometria } from './antropometria';
+import { Laboratorial } from "./laboratorial";
 
 @Entity('pacientes')
 export class Paciente extends BaseEntity {
@@ -31,4 +33,10 @@ export class Paciente extends BaseEntity {
 
     @OneToMany(() => Cita, (cita) => cita.paciente)
     citas: Cita[];
+
+    @OneToMany(() => Antropometria, (antropometria) => antropometria.paciente)
+    antropometricos: Antropometria[];
+
+    @OneToMany(() => Laboratorial, laboratorial => laboratorial.paciente)
+    laboratoriales: Laboratorial[];
 }

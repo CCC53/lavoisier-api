@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { Usuario } from '../models/user';
+import { Personal } from '../models/personal';
 
 export enum SexTypes {
     MASCULINO = "M",
@@ -28,11 +28,11 @@ export enum EnfermedadesResponse {
 }
 
 export interface IRequest extends Request {
-    usuario?: Usuario;
+    personal?: Personal;
 };
 
 export interface jwtPayload {
-    usuario: Usuario;
+    personal: Personal;
     iat: number;
     exp: number;
 };

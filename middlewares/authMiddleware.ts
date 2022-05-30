@@ -15,7 +15,7 @@ export const verifyToken = (req: IRequest, res: Response, next: NextFunction) =>
             })
         }
         const decoded = verify(token, seed) as jwtPayload;
-        req.usuario = decoded.usuario;
+        req.personal = decoded.personal;
         next();
     } catch (error) {
         res.status(500).json({
@@ -25,8 +25,8 @@ export const verifyToken = (req: IRequest, res: Response, next: NextFunction) =>
 };
 
 export const verifyNutriologoRol = (req: IRequest, res: Response, next: NextFunction) => {
-    const usuario = req.usuario;
-    if (usuario?.rol === RolTypes.NUTRIOLOGO) {
+    const personal = req.personal;
+    if (personal?.rol === RolTypes.NUTRIOLOGO) {
         next();
     } else {
         res.status(401).json({
@@ -36,8 +36,8 @@ export const verifyNutriologoRol = (req: IRequest, res: Response, next: NextFunc
 }
 
 export const verifyRecepcionistaRol = (req: IRequest, res: Response, next: NextFunction) => {
-    const usuario = req.usuario;
-    if (usuario?.rol === RolTypes.RECEPCIONISTA) {
+    const personal = req.personal;
+    if (personal?.rol === RolTypes.RECEPCIONISTA) {
         next();
     } else {
         res.status(401).json({

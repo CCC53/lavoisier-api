@@ -1,8 +1,8 @@
 import { BaseEntity, PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
 import { RolTypes } from '../types/types';
 
-@Entity('usuarios')
-export class Usuario extends BaseEntity {
+@Entity('personal')
+export class Personal extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
@@ -12,15 +12,8 @@ export class Usuario extends BaseEntity {
     @Column()
     telefono: string;
 
-    @Column({
-        unique: true,
-    })
+    @Column({ unique: true })
     email: string;
-
-    @Column({
-        type: "date"
-    })
-    nacimiento: Date;
 
     @Column()
     password: string;

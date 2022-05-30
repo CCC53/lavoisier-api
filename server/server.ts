@@ -1,9 +1,9 @@
 import cors from 'cors';
-import { DataSource } from "typeorm";
-import express, { Application } from 'express';
 import "reflect-metadata";
 import dotenv from 'dotenv';
-import { pacientesRouter, citasRouter, authRouter, pagosRouter } from '../routes/router';
+import { DataSource } from "typeorm";
+import express, { Application } from 'express';
+import { pacientesRouter, citasRouter, authRouter, pagosRouter, historialClinicoRouter } from '../routes/router';
 
 dotenv.config();
 
@@ -14,13 +14,14 @@ export class Server {
         auth: '/api/auth',
         pacientes: '/api/pacientes',
         citas: '/api/citas',
-        pagos: '/api/pagos'
+        pagos: '/api/pagos',
+        historialClinico: '/api/historial-clinico'
     }
 
     constructor() {
         this.application = express();
         this.port = process.env.PORT || '3001';
-        this.db();
+        this.dbInit();
         this.middlewares();
         this.routes();
     }
@@ -32,7 +33,7 @@ export class Server {
         this.application.use(cors());
     }
 
-    async db(): Promise<void> {
+    async dbInit(): Promise<void> {
         try {
             const db = new DataSource({
                 type: "postgres",
@@ -57,6 +58,7 @@ export class Server {
         this.application.use(this.apiPaths.pacientes, pacientesRouter);
         this.application.use(this.apiPaths.citas, citasRouter);
         this.application.use(this.apiPaths.pagos, pagosRouter);
+        this.application.use(this.apiPaths.historialClinico, historialClinicoRouter);
     }
 
     listen(): void {
