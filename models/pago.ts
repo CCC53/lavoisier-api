@@ -25,6 +25,9 @@ export class Pago extends BaseEntity {
     @OneToOne(() => Cita, cita => cita.id, {
         onDelete: "CASCADE"
     })
-    @JoinColumn()
+    @JoinColumn({name: 'cita_id'})
     cita: Cita;
+
+    @Column({name: 'cita_id', nullable: true})
+    citaId: string;
 }

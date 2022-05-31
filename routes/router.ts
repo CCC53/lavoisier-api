@@ -3,7 +3,7 @@ import { getCitas, getCitaByID, updateCita, deleteCita, addCita } from '../contr
 import { getPacientes, getPacienteByID, deletePaciente, addPaciente, updatePaciente } from '../controllers/pacientesController';
 import { registerPersonal, loginPersonal } from '../controllers/personalController';
 import { verifyToken, verifyRecepcionistaRol, verifyNutriologoRol } from '../middlewares/authMiddleware';
-import { addPago, getPagos, getPagoByID } from '../controllers/pagosController';
+import { addPago, getPagos, getPagoByID, getPagoByCitaID } from '../controllers/pagosController';
 import { addHistorialClinico, getHistorialClinicoByID } from '../controllers/historialController';
 
 export const authRouter = Router();
@@ -28,6 +28,7 @@ export const pagosRouter = Router();
 pagosRouter.post('/', [verifyToken, verifyRecepcionistaRol], addPago);
 pagosRouter.get('/', [verifyToken, verifyRecepcionistaRol], getPagos);
 pagosRouter.get('/:id', [verifyToken, verifyRecepcionistaRol], getPagoByID);
+pagosRouter.get('/cita/:citaId', [verifyToken, verifyRecepcionistaRol], getPagoByCitaID);
 
 export const historialClinicoRouter = Router();
 historialClinicoRouter.get('/:id', [verifyToken, verifyNutriologoRol], getHistorialClinicoByID);

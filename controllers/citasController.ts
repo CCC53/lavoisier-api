@@ -4,6 +4,15 @@ import { Cita } from '../models/cita';
 export const getCitas = async(req: Request, res: Response) => {
     try {
         const citas = await Cita.find();
+        citas.sort((citaB, citaD) => {
+            if (citaB.fecha > citaD.fecha) {
+                return 1;
+            }
+            if (citaB.fecha < citaD.fecha) {
+                return -1;
+            }
+            return 0;
+        })
         res.json({
             citas
         });

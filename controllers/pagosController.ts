@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
+import { createQueryBuilder } from "typeorm";
 import { Pago } from '../models/pago';
 
 export const addPago = async(req: Request, res: Response) => {
     try {
-        const { cita, monto, metodoPago, tipoPago, cantidadRecibida } = req.body;
+        const { citaId, monto, metodoPago, tipoPago, cantidadRecibida } = req.body;
         let cambio = cantidadRecibida-monto;
         const pago = await Pago.create({
             monto,
@@ -11,7 +12,7 @@ export const addPago = async(req: Request, res: Response) => {
             tipoPago,
             cantidadRecibida,
             cambio,
-            cita
+            citaId
         });
         await pago.save();
         res.json({
@@ -60,3 +61,17 @@ export const getPagoByID = async(req: Request, res: Response) => {
         });
     }
 }
+
+export const getPagoByCitaID = async(req: Request, res: Response) => {
+    try {
+        const { citaId } = req.params;
+        const pago = await Pago.createQueryBuilder().select('*').where('cita_id = :citaId', {citaId}).getRawOne() as Pago;
+        res.json({
+            pago
+        });
+    } catch (error) {
+        res.status(500).json({
+            error
+        });
+    }
+};
