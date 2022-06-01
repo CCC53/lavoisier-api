@@ -4,7 +4,7 @@ import { getPacientes, getPacienteByID, deletePaciente, addPaciente, updatePacie
 import { registerPersonal, loginPersonal } from '../controllers/personalController';
 import { verifyToken, verifyRecepcionistaRol, verifyNutriologoRol } from '../middlewares/authMiddleware';
 import { addPago, getPagos, getPagoByID, getPagoByCitaID } from '../controllers/pagosController';
-import { addHistorialClinico, getHistorialClinicoByID } from '../controllers/historialController';
+import { addHistorialClinico, getHistorialClinicoByID, getHistoriales, getHistorialByPacienteID, updateHistorial } from '../controllers/historialController';
 
 export const authRouter = Router();
 authRouter.post('/register', registerPersonal);
@@ -31,5 +31,8 @@ pagosRouter.get('/:id', [verifyToken, verifyRecepcionistaRol], getPagoByID);
 pagosRouter.get('/cita/:citaId', [verifyToken, verifyRecepcionistaRol], getPagoByCitaID);
 
 export const historialClinicoRouter = Router();
+historialClinicoRouter.get('/', [verifyToken, verifyNutriologoRol], getHistoriales);
 historialClinicoRouter.get('/:id', [verifyToken, verifyNutriologoRol], getHistorialClinicoByID);
+historialClinicoRouter.get('/paciente/:pacienteId', [verifyToken, verifyNutriologoRol], getHistorialByPacienteID);
 historialClinicoRouter.post('/', [verifyToken, verifyNutriologoRol], addHistorialClinico);
+historialClinicoRouter.put('/:id', [verifyToken, verifyNutriologoRol], updateHistorial);

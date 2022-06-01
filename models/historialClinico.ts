@@ -32,12 +32,15 @@ export class HistotrialClinico extends BaseEntity {
     @Column({ type: 'enum', enum: EnfermedadesResponse })
     cafe: string;
 
-    @Column()
+    @Column({ nullable: true  })
     alimentacion: string;
 
     @OneToOne(() => Paciente, paciente => paciente.id, {
         onDelete: 'CASCADE'
     })
-    @JoinColumn()
+    @JoinColumn({ name: 'paciente_id' })
     paciente: Paciente;
+
+    @Column({name: 'paciente_id', nullable: true})
+    pacienteId: string;
 }

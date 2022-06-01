@@ -65,7 +65,12 @@ export const getPagoByID = async(req: Request, res: Response) => {
 export const getPagoByCitaID = async(req: Request, res: Response) => {
     try {
         const { citaId } = req.params;
-        const pago = await Pago.createQueryBuilder().select('*').where('cita_id = :citaId', {citaId}).getRawOne() as Pago;
+        const pago = await Pago.findOne({ where: { citaId } });
+        if (!pago) {
+            return res.status(404).json({
+                pago: null
+            });
+        }
         res.json({
             pago
         });
