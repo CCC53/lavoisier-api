@@ -4,7 +4,7 @@ import { NextFunction, Response } from 'express';
 import { IRequest, jwtPayload, RolTypes } from '../types/types';
 
 dotenv.config();
-const seed = process.env.SEED || "uwu";
+const seed = process.env.SEED || "seed-de-desarrollo";
 
 export const verifyToken = (req: IRequest, res: Response, next: NextFunction) => {
     try {

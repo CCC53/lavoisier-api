@@ -26,17 +26,11 @@ export class Antropometria extends BaseEntity {
 
     @Column({ type: 'float', name: 'p_triceps' })
     pTriceps: number;
-
-    @Column({ type: 'float', name: 'p_subescapular' })
-    pSubescapular: number;
-    
-    @Column({ type: 'float', name: 'p_suprailiaco' })
-    pSuprailiaco: number;
     
     @Column({ type: 'float', name: 'p_abdominal' })
     pAbdominal: number;
 
-    @Column()
+    @Column({ name: 'porcentaje_grasa' })
     porcentajeGrasa: string;
 
     @ManyToOne( () => Paciente, (paciente) => paciente.antropometricos, {

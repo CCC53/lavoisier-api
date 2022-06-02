@@ -3,7 +3,7 @@ import "reflect-metadata";
 import dotenv from 'dotenv';
 import { DataSource } from "typeorm";
 import express, { Application } from 'express';
-import { pacientesRouter, citasRouter, authRouter, pagosRouter, historialClinicoRouter } from '../routes/router';
+import { pacientesRouter, citasRouter, authRouter, pagosRouter, historialClinicoRouter, laboratorialRouter, antropometriaRouter } from '../routes/router';
 
 dotenv.config();
 
@@ -15,7 +15,9 @@ export class Server {
         pacientes: '/api/pacientes',
         citas: '/api/citas',
         pagos: '/api/pagos',
-        historialClinico: '/api/historial-clinico'
+        historialClinico: '/api/historial-clinico',
+        laboratorial: '/api/laboratorial',
+        antropometria: '/api/antropometria'
     }
 
     constructor() {
@@ -59,6 +61,8 @@ export class Server {
         this.application.use(this.apiPaths.citas, citasRouter);
         this.application.use(this.apiPaths.pagos, pagosRouter);
         this.application.use(this.apiPaths.historialClinico, historialClinicoRouter);
+        this.application.use(this.apiPaths.laboratorial, laboratorialRouter);
+        this.application.use(this.apiPaths.antropometria, antropometriaRouter);
     }
 
     listen(): void {
