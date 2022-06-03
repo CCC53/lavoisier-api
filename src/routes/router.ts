@@ -40,13 +40,13 @@ historialClinicoRouter.post('/', [verifyToken, verifyNutriologoRol], addHistoria
 historialClinicoRouter.put('/:id', [verifyToken, verifyNutriologoRol], updateHistorial);
 
 export const laboratorialRouter = Router();
-laboratorialRouter.get('/', [verifyToken, verifyNutriologoRol], getLaboratoriales);
+laboratorialRouter.get('/paciente/:pacienteId', [verifyToken, verifyNutriologoRol], getLaboratoriales);
 laboratorialRouter.get('/:id', [verifyToken, verifyNutriologoRol], getLaboratorialByID);
 laboratorialRouter.post('/', [verifyToken, verifyNutriologoRol], addLaboratorial);
 laboratorialRouter.put('/:id', [verifyToken, verifyNutriologoRol], updateLaboratorial);
 
 export const antropometriaRouter = Router();
-antropometriaRouter.get('/', [verifyToken, verifyNutriologoRol], getAntropometricos);
+antropometriaRouter.get('/paciente/:pacienteId', [verifyToken, verifyNutriologoRol], getAntropometricos);
 antropometriaRouter.get('/:id', [verifyToken, verifyNutriologoRol], getAntropometricoByID);
 antropometriaRouter.post('/', [verifyToken, verifyNutriologoRol], addAntropometrico);
 antropometriaRouter.put('/:id', [verifyToken, verifyNutriologoRol], updateAntropometrico);

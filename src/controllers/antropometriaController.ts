@@ -4,7 +4,8 @@ import { pick } from 'underscore';
 
 export const getAntropometricos = async(req: Request, res: Response) => {
     try {
-        const antropometricos = await Antropometria.find();
+        const { pacienteId } = req.params;
+        const antropometricos = await Antropometria.find({ where: { pacienteId } });
         res.json({
             antropometricos
         })
@@ -36,7 +37,7 @@ export const getAntropometricoByID = async(req: Request, res: Response) => {
 
 export const addAntropometrico = async(req: Request, res: Response) => {
     try {
-        const { fecha, peso, talla, imc, cintura, cBrazo, pTriceps, pAbdominal, porcentajeGrasa, paciente  } = req.body;
+        const { fecha, peso, talla, imc, cintura, cBrazo, pTriceps, pAbdominal, porcentajeGrasa, pacienteId  } = req.body;
         const antropometrico = await Antropometria.create({
             fecha,
             peso,
@@ -47,7 +48,7 @@ export const addAntropometrico = async(req: Request, res: Response) => {
             pTriceps,
             pAbdominal,
             porcentajeGrasa,
-            paciente
+            pacienteId
         });
         await antropometrico.save();
         res.json({

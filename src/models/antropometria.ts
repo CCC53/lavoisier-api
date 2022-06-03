@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Paciente } from './paciente';
 
 @Entity('antropometria')
@@ -36,5 +36,9 @@ export class Antropometria extends BaseEntity {
     @ManyToOne( () => Paciente, (paciente) => paciente.antropometricos, {
         onDelete: 'CASCADE'
     })
+    @JoinColumn({ name: 'paciente_id' })
     paciente: Paciente;
+
+    @Column({ name: 'paciente_id' })
+    pacienteId: string;
 };

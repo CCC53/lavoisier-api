@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { DataSource } from "typeorm";
 import express, { Application } from 'express';
 import { pacientesRouter, citasRouter, authRouter, pagosRouter, historialClinicoRouter, laboratorialRouter, antropometriaRouter } from '../routes/router';
+import { entities } from '../models/entities';
 
 dotenv.config();
 
@@ -44,7 +45,7 @@ export class Server {
                 username: process.env.DB_USER,
                 password: process.env.DB_PASSWORD,
                 database: "lavoisierdb",
-                entities: ["models/*.ts"],
+                entities,
                 synchronize: true,
                 logging: false,
             });

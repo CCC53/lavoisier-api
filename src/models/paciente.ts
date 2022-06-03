@@ -31,12 +31,18 @@ export class Paciente extends BaseEntity {
     })
     email: string;
 
-    @OneToMany(() => Cita, (cita) => cita.paciente)
+    @OneToMany(() => Cita, (cita) => cita.paciente, {
+        onDelete: 'CASCADE'
+    })
     citas: Cita[];
 
-    @OneToMany(() => Antropometria, (antropometria) => antropometria.paciente)
+    @OneToMany(() => Antropometria, (antropometria) => antropometria.paciente, {
+        onDelete: 'CASCADE'
+    })
     antropometricos: Antropometria[];
 
-    @OneToMany(() => Laboratorial, laboratorial => laboratorial.paciente)
+    @OneToMany(() => Laboratorial, laboratorial => laboratorial.paciente, {
+        onDelete: 'CASCADE'
+    })
     laboratoriales: Laboratorial[];
 }

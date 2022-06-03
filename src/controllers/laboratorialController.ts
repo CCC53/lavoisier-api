@@ -24,7 +24,8 @@ export const getLaboratorialByID = async(req: Request, res: Response) => {
 
 export const getLaboratoriales = async(req: Request, res: Response) => {
     try {
-        const laboratoriales = await Laboratorial.find();
+        const { pacienteId } = req.params;
+        const laboratoriales = await Laboratorial.find({ where: { pacienteId } });
         res.json({
             laboratoriales
         });
@@ -37,7 +38,7 @@ export const getLaboratoriales = async(req: Request, res: Response) => {
 
 export const addLaboratorial = async(req: Request, res: Response) => {
     try {
-        const { fecha, glucosa, insulina, trigliceridos, colesterolTotal, hdl, ldl, paciente } = req.body;
+        const { fecha, glucosa, insulina, trigliceridos, colesterolTotal, hdl, ldl, pacienteId } = req.body;
         const laboratorial = await Laboratorial.create({
             fecha,
             glucosa,
@@ -46,7 +47,7 @@ export const addLaboratorial = async(req: Request, res: Response) => {
             colesterolTotal,
             hdl,
             ldl,
-            paciente
+            pacienteId
         });
         await laboratorial.save();
         res.json({
