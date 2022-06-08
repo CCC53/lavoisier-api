@@ -1,12 +1,9 @@
 import cors from 'cors';
 import "reflect-metadata";
-import dotenv from 'dotenv';
-import { DataSource } from "typeorm";
 import express, { Application } from 'express';
-import { pacientesRouter, citasRouter, authRouter, pagosRouter, historialClinicoRouter, laboratorialRouter, antropometriaRouter } from '../routes/router';
-import { entities } from '../models/entities';
-
-dotenv.config();
+import { db } from '../db/db';
+import { pacientesRouter, citasRouter, authRouter, pagosRouter, historialClinicoRouter,
+            laboratorialRouter, antropometriaRouter } from '../routes/router';
 
 export class Server {
     private application: Application;
@@ -38,17 +35,6 @@ export class Server {
 
     async dbInit(): Promise<void> {
         try {
-            const db = new DataSource({
-                type: "postgres",
-                host: "localhost",
-                port: 5432,
-                username: process.env.DB_USER,
-                password: process.env.DB_PASSWORD,
-                database: "lavoisierdb",
-                entities,
-                synchronize: true,
-                logging: false,
-            });
             await db.initialize();
             console.log("DB online");
         } catch (error) {
@@ -68,7 +54,7 @@ export class Server {
 
     listen(): void {
         this.application.listen(this.port, () => {
-            console.log(`Servidor en el puerto ${this.port}`)
+            console.log(`Servidor en el puerto ${this.port}`);
         });
     }
 }

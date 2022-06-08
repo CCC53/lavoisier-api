@@ -49,7 +49,7 @@ export const loginPersonal = async(req: Request, res: Response) => {
                 email: personal.email,
                 rol: personal.rol
             }
-        }, seed, {expiresIn: '48h'});
+        }, seed, {expiresIn: '1h'});
         res.json({
             token
         })
