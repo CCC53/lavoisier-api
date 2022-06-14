@@ -9,9 +9,7 @@ export class Cita extends BaseEntity {
     @Column()
     motivo: string;
 
-    @Column({
-        type: "date"
-    })
+    @Column({ type: "date" })
     fecha: Date;
 
     @Column()

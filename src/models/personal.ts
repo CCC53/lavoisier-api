@@ -18,9 +18,6 @@ export class Personal extends BaseEntity {
     @Column()
     password: string;
 
-    @Column({
-        type: "enum",
-        enum: RolTypes
-    })
+    @Column({ type: "enum", enum: RolTypes })
     rol: string;
 };

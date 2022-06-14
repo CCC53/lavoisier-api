@@ -12,23 +12,16 @@ export class Paciente extends BaseEntity {
     @Column()
     nombre: string;
 
-    @Column({
-        type: "date"
-    })
+    @Column({ type: "date" })
     nacimiento: Date;
 
-    @Column({
-        type: "enum",
-        enum: SexTypes
-    })
+    @Column({ type: "enum", enum: SexTypes })
     sexo: string;
 
     @Column()
     telefono: string;
 
-    @Column({
-        unique: true
-    })
+    @Column({ unique: true })
     email: string;
 
     @OneToMany(() => Cita, (cita) => cita.paciente, {
