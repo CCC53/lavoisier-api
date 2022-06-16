@@ -6,7 +6,7 @@ import { Personal } from '../models/personal';
 
 dotenv.config();
 
-const seed = process.env.SEED || "uwu";
+const seed = process.env.SEED || "seed-de-desarrollo";
 
 export const registerPersonal = async(req: Request, res: Response) => {
     try {

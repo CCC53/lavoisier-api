@@ -1,7 +1,6 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm';
 import { EnfermedadesResponse } from '../types/types';
 import { Paciente } from './paciente';
-import { Laboratorial } from './laboratorial';
 
 @Entity('historial_clinico')
 export class HistotrialClinico extends BaseEntity {

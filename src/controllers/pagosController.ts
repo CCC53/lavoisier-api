@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { createQueryBuilder } from "typeorm";
 import { Pago } from '../models/pago';
 
 export const addPago = async(req: Request, res: Response) => {
